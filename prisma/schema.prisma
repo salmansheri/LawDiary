@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String   @unique
+  hashedPassword String?
+  image          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  cases   Case[]
+  clients Client[]
+}
+
+model Case {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  regno      Int?
+  cnrNo      Int?
+  date String?
+  hearingDate String?
+  clientName String?
+  lawyerId   String  @db.ObjectId
+  clientId   String  @db.ObjectId
+  caseName   String?
+  caseStatus String  @default("default")
+
+  oppositeParty    String?
+  oppositeAdvocate String?
+  description      String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  hearings Hearing[]
+
+  IA IA[]
+
+  lawyer User @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Client {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  clientName String?
+  address    String?
+  mobile     Int?
+  email      String
+  lawyerId   String   @db.ObjectId
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  lawyer User @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
+
+  cases Case[]
+}
+
+model IA {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  caseId   String  @db.ObjectId
+  iaStatus String?
+  iaTitle  String?
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+}
+
+model Hearing {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  caseId String @db.ObjectId
+  nextHearing String? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cases Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+}
+
+
