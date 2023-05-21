@@ -2,6 +2,11 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import Navbar from "@/components/navbar/Navbar";
+import Modal from "@/components/Modal/Modal";
+import LoginModal from "@/components/Modal/LoginModal";
+import RegisterModal from "@/components/Modal/RegisterModal";
+import ToasterProvider from "@/providers/ToasterProvider";
+import AuthProvider from "@/providers/AuthProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,7 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
+        {/* <Modal isOpen title="login" actionLabel="Login" /> */}
+        <AuthProvider>
+
+        <LoginModal />
+        <RegisterModal />
         <main className="flex">
+          <ToasterProvider />
           <div className="flex-2">
             <Sidebar />
           </div>
@@ -30,6 +41,7 @@ export default function RootLayout({
           <Navbar />
           </div>
         </main>
+        </AuthProvider>
       </body>
     </html>
   );

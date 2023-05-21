@@ -28,10 +28,10 @@ const Input:React.FC<InputProps> = ({
 
 }) => {
   return (
-    <div className="lg:flex justify-between my-3">
+    <div className="my-3">
         <label>{label}</label>
         <input 
-            className="w-full lg:w-[70%] p-2 ring-myViolet border border-myViolet   focus:outline-myViolet" 
+            className="w-full p-2 ring-myViolet border border-myViolet   focus:outline-myViolet" 
             placeholder={placeholder}
             
            

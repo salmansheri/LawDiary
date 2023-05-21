@@ -1,15 +1,17 @@
+import getCurrentUser from "@/actions/getCurrentUser";
 import Header from "@/components/Header";
 import Dropdown from "@/components/navbar/Dropdown";
-import Link from "next/link";
+import { User } from "@prisma/client";
 
 
 
-export default function Home() {
-  const currentUser  = false; 
+export default async function Home() {
+  const currentUser: User | null | undefined  = await getCurrentUser(); 
+  console.log(currentUser); 
   return (
     <div className="">
 
-     <Dropdown currentUser={currentUser} />
+     <Dropdown currentUser={currentUser}  />
       
       <Header />
       
