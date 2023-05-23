@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../Button';
 import useRegisterModal from '@/hooks/useRegisterModal';
 import useLoginModal from '@/hooks/useLoginModal';
-import { useSession } from 'next-auth/react'; 
+import { signOut, useSession } from 'next-auth/react'; 
 import { User } from '@prisma/client';
 
 interface DropdownProps {
@@ -47,10 +47,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         
           <Link href="/profile">My Profile</Link>
        
-        <li >
+        <div className="cursor-pointer" onClick={() => signOut()} >
           Sign Out
 
-        </li>
+        </div>
       </ul>
       </div>
     )}

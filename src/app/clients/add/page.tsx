@@ -1,5 +1,9 @@
+import AddClients from "./AddClients";
+
 export default function AddCasePage() {
     return(
-        <div>Add CasePage</div>
+        <div>
+            <AddClients />
+        </div>
     )
 }

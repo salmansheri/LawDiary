@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,6 +19,7 @@
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "daisyui": "^2.51.6",
+    "date-fns": "^2.30.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "framer-motion": "^10.12.12",

@@ -9,7 +9,8 @@ interface TableProps {
     tableHead?: React.ReactElement; 
     tableBody?: React.ReactElement; 
     areaLabel?: string; 
-    onClick? : () => void; 
+    onClick? : () => void;
+    subTitle?: string;  
 }
 
 const Table: React.FC<TableProps> = ({
@@ -18,21 +19,17 @@ const Table: React.FC<TableProps> = ({
     tableBody,
     tableHead,
     onClick,
+    subTitle
 }) => {
   const router = useRouter(); 
  
   return (
     <div className="overflow-x-auto">
-      <div className="flex flex-row justify-between items-center">
+      <div className="">
 
        <h1 className="text-3xl mb-5 font-semibold">{title}</h1>
-       <Button
-        label={areaLabel as string}
-        type="button"
-        onClick={onClick}
-        addBtn
-
-       /> 
+       <p className='mb-5 text-gray-400 text-base italic'>{subTitle}</p>
+      
       </div>
     <table className="table table-zebra w-full">
       {/* head */}

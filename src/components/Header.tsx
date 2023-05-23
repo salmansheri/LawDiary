@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div className="bg-myViolet flex flex-row text-white rounded-lg shadow-md justify-between items-center p-5">
+    <div className="bg-myViolet flex flex-col gap-5 lg:flex-row text-white rounded-lg shadow-md justify-between items-center p-5">
         <div>
 
             <h2 className="font-light text-sm">Undated Cases</h2>

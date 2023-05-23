@@ -2,11 +2,21 @@
 
 import Button from '@/components/Button';
 import Input from '@/components/inputs/Input'
-import { watch } from 'fs';
+import axios from 'axios';
+// import { watch } from 'fs';
 import React, { useState } from 'react'; 
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'; 
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation'; 
 
-const AddCases = () => {
+interface AddCasesProps {
+    clientId?: string; 
+}
+
+const AddCases: React.FC<AddCasesProps> = ({
+    clientId
+}) => {
+    const router = useRouter(); 
     const [isLoading, setIsLoading] = useState(false); 
     const {
         register,
@@ -19,21 +29,37 @@ const AddCases = () => {
         
     } = useForm<FieldValues>({
         defaultValues:{
-            registerNumber: 0,
-            cnrNumber:0,
+            registerNumber: "",
+            cnrNumber:"",
             clientName: "",
             caseName: "",
             date: "",
             hearingDate: "",
-            IA: [],
+            courtName: "",
+            courtPlace: "",
+            clientId: clientId,
+           
             oppositeParty: "",
             oppositeAdvocate: "",
-            caseDescription: "",
+            description: "",
         }
     }); 
 
     const onClick: SubmitHandler<FieldValues> = (data) => {
-        console.log(data); 
+        setIsLoading(true); 
+        axios.post("/api/cases", data)
+            .then(() => {
+                toast.success("Successfully Added Cases"); 
+                router.push("/profile"); 
+                
+            })
+            .catch((error: any) => {
+                console.log(error); 
+                toast.error("Someting Went Wrong"); 
+            })
+            .finally(() => {
+                setIsLoading(false); 
+            })
 
     }
 
@@ -49,7 +75,7 @@ const AddCases = () => {
             id="registerNumber"
             register={register}
             onClick={handleSubmit(onClick)}
-            type="number"
+            type="text"
             errors={errors}
             label="Register Number:"
             disabled={isLoading}
@@ -59,7 +85,7 @@ const AddCases = () => {
         />
         <Input 
             placeholder="Enter Date"
-            id="registerNumber"
+            id="date"
             register={register}
             onClick={handleSubmit(onClick)}
             type="date"
@@ -88,7 +114,7 @@ const AddCases = () => {
             id="cnrNumber"
             register={register}
            
-            type="number"
+            type="text"
             errors={errors}
             label="CNR No: "
             disabled={isLoading}
@@ -123,18 +149,32 @@ const AddCases = () => {
 
         />
         <Input 
-            placeholder="Enter Register No"
-            id="registerNumber"
+            placeholder="Enter Court Name..."
+            id="courtName"
             register={register}
-           
-            type="number"
+   
+            type="text"
             errors={errors}
-            label="Register Number:"
+            label="Court Name"
             disabled={isLoading}
 
 
 
         />
+        <Input 
+            placeholder="Enter Court Place"
+            id="courtPlace"
+            register={register}
+   
+            type="text"
+            errors={errors}
+            label="Court Place"
+            disabled={isLoading}
+
+
+
+        />
+      
         <Input 
             placeholder="Enter Opposition Party"
             id="oppositeParty"
@@ -149,7 +189,7 @@ const AddCases = () => {
 
         />
         <Input 
-            placeholder="Enter Register No"
+            placeholder="Enter Opposite Advocate"
             id="oppositeAdvocate"
             register={register}
             
@@ -166,7 +206,7 @@ const AddCases = () => {
         <textarea className="w-[70%] p-2 border border-myViolet focus:outline-myViolet"
             placeholder="Enter Register No"
             id="registerNumber"
-            {...register("caseDescription")}   
+            {...register("description")}   
           
             
            
@@ -178,7 +218,7 @@ const AddCases = () => {
         </div>
 
         <Button 
-            label="Add Cases"
+            label={isLoading ? "Loading...": "Add"}
             type="button"
             onClick={handleSubmit(onClick)}
         />

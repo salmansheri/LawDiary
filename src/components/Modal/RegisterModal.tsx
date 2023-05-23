@@ -8,6 +8,7 @@ import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
   const loginModal = useLoginModal();
@@ -56,6 +57,9 @@ const RegisterModal = () => {
     setIsloading(true);
     axios.post("/api/users", data).then(() => {
       toast.success("Sucessfully Registered");
+      signIn('credentials', {
+        ...data
+      })
     }).catch((error) => {
       console.log(error); 
       toast.error("Something went Wrong")

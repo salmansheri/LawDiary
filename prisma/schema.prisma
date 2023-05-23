@@ -25,8 +25,8 @@ model User {
 
 model Case {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  regno      Int?
-  cnrNo      Int?
+  regno      String?
+  cnrNo      String?
   date String?
   hearingDate String?
   clientName String?
@@ -34,6 +34,8 @@ model Case {
   clientId   String  @db.ObjectId
   caseName   String?
   caseStatus String  @default("default")
+  courtName String? 
+  courtPlace String?
 
   oppositeParty    String?
   oppositeAdvocate String?
@@ -48,6 +50,8 @@ model Case {
   lawyer User @relation(fields: [lawyerId], references: [id], onDelete: Cascade)
 
   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  
 }
 
 model Client {
@@ -83,5 +87,7 @@ model Hearing {
 
   cases Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
 }
+
+
 
 

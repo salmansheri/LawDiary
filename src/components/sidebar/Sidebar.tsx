@@ -20,14 +20,14 @@ const Sidebar = () => {
         {
             id: 2,
             label: "Cases",
-            active: pathname === "/cases",
+            active: pathname.includes("/cases"),
             href: "/cases",
             icon: AiFillBook
         },
         {
             id: 3,
             label: "Clients",
-            active: pathname === "/clients",
+            active: pathname.includes("/clients"),
             href: "/clients",
             icon: FaUsers
         },

@@ -1,12 +1,17 @@
+import ClientsTable from '@/components/Table/ClientsTable';
 import * as React from 'react';
+import { getClients } from '@/actions/getClients';
 
-interface IClientsPageProps {
-}
 
-const ClientsPage: React.FunctionComponent<IClientsPageProps> = (props) => {
+export const revalidate = 30; 
+
+// @ts-expect-error async Server component
+const ClientsPage = async (props) => {
+  const clients = await getClients(); 
   return(
     <div>
-        ClientsPage
+      <ClientsTable clients={clients} />
+        
     </div>
   ) ;
 };
