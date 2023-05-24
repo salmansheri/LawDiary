@@ -44,7 +44,11 @@ export async function getCasesById(caseId: string) {
                 client: true,
                 lawyer: true,
                 IA: true,
-                hearings: true,
+                hearings: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    }
+                }
             }
         }); 
 

@@ -3,6 +3,7 @@ import CaseDetails from "./CaseDetails";
 import LawyerDetails from "./LawyerDetails";
 import ClientDetails from "./ClientDetails";
 import IADetails from "./IADetails";
+import Hearing from "./Hearing";
 
 interface IParams {
   caseId: string;
@@ -28,6 +29,11 @@ export default async function CaseDetailsPage({ params }: { params: IParams }) {
       IA={courtCase?.IA}
       caseId={courtCase?.id}
     />
+
+    <Hearing 
+      hearings={courtCase?.hearings}
+      caseId={caseId}
+      />
     </section>
   );
 }

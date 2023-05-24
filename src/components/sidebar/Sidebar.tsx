@@ -35,7 +35,7 @@ const Sidebar = () => {
     ]
   return (
     <div className="hidden lg:block py-5 px-2 sticky top-0">
-        <h1 className="text-lg md:text-2xl font-bold text-myViolet">Law Diary</h1>
+        <h1 className="text-lg md:text-2xl font-bold text-myViolet animate-bounce">Law Diary</h1>
         <div>
             {sidebarItems.map((item) => (
                 <SidebarItems 

@@ -70,11 +70,11 @@ const IADetails: React.FC<IADetailsProps> = ({ IA, caseId }) => {
     <div className="glassmorphism  justify-between">
       <div className="flex flex-col gap-5">
         <div>
-          <label>IA title: </label>
+          <label>IA Status: </label>
           <input {...register('iaStatus', {required: true})} className="w-full p-2 border border-myViolet focus:outline-myViolet" />
         </div>
         <div>
-          <label>IA title: </label>
+          <label>IA Title: </label>
           <input {...register('iaTitle')} className="w-full p-2 border border-myViolet" />
         </div>
         <div className="w-[30%]">
